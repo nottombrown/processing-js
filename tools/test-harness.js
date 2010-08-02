@@ -29,17 +29,17 @@ Array.prototype.compareArrays = function(arr, eps) {
   return true;
 };
 
-Array.prototype.stringifyArray = function () {
-  var stringified ="";
+Array.prototype.toString = function () {
+  var stringified = "";
   for (var i = 0; i < this.length; i++) {
-    if (this[i].stringifyArray) { //nested array?
-      stringified = stringified + this[i].stringifyArray() + ",";
+    if (this[i].compareArrays) { //nested array?
+      stringified += this[i].toString() + ",";
     }
     else {
-      stringified = stringified + this[i] + ",";
+      stringified += this[i] + ",";
     }
   }
-  return "[" +stringified.slice(0,-1) + "]";
+  return ("[" +stringified.slice(0,-1) + "]");
 };
 
 function _checkEqual(a, b) {
@@ -49,7 +49,7 @@ function _checkEqual(a, b) {
     if (a.compareArrays(b, eps))
       _pass();
     else
-      _fail(a.stringifyArray() + " != " + b.stringifyArray());
+      _fail(a + " != " + b);
   } else {
     if ((!eps && a != b) || (eps && (Math.abs(a - b) > eps)))
       _fail(a + " != " + b);
