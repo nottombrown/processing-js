@@ -1,4 +1,4 @@
- === AUTOMATED TESTINTG ===========================
+ === AUTOMATED TESTING ===========================
 
  1. Setup and Install
  2. Running Tests
@@ -23,6 +23,7 @@
     $ cd mozilla-central/js/src
     $ autoconf213
     $ mkdir opt-build
+		$ cd opt-build
     $ ../configure --disable-debug --enable-optimize
     $ make
 
