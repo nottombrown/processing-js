@@ -29,6 +29,19 @@ Array.prototype.compareArrays = function(arr, eps) {
   return true;
 };
 
+Array.prototype.stringifyArray = function () {
+  var stringified ="";
+  for (var i = 0; i < this.length; i++) {
+    if (this[i].stringifyArray) { //nested array?
+      stringified = stringified + this[i].stringifyArray() + ",";
+    }
+    else {
+      stringified = stringified + this[i] + ",";
+    }
+  }
+  return "[" +stringified.slice(0,-1) + "]";
+};
+
 function _checkEqual(a, b) {
   // If user passed a third arg (Epsilon) use it for ~=
   var eps = arguments[2] || 0;
@@ -36,7 +49,7 @@ function _checkEqual(a, b) {
     if (a.compareArrays(b, eps))
       _pass();
     else
-      _fail(a + " != " + b);
+      _fail(a.stringifyArray() + " != " + b.stringifyArray());
   } else {
     if ((!eps && a != b) || (eps && (Math.abs(a - b) > eps)))
       _fail(a + " != " + b);
